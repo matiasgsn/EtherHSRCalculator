@@ -245,7 +245,7 @@ body{
 
 .turn{
     display: flex;
-    background-color: #31363F;
+    background-color: var(--secondary-color); 
     border-radius: 1em;
     width: 60%;
     height: 6em;
@@ -270,11 +270,24 @@ body{
     background-color: var(--accent-color);
 }
 
+@media only screen and (max-width: 1200px) {
+    .characterimgsm{
+        z-index: 1;
+    }
+}
+
 .turntitle{
     display: flex;
     position: absolute;
     transform: translate(50%, -175%);
     flex-direction: column;
+}
+
+@media only screen and (max-width: 1200px){
+    .turntitle{
+        left: 50%;
+        transform: translate(-50%, -175%);
+    }
 }
 
 .turncharactername{
@@ -300,10 +313,104 @@ body{
     font-size: 2em;
 }
 
-.actiontypeslot{
+@media only screen and (max-width: 1200px) {
+    .turnavslot{
+        height: 5em;
+        width: 3em;
+        transform: translate(-50%, 25%);
+        border-radius: 1em;
+        border-top-left-radius: 0em;
+        border-top-right-radius: 0em;
+    }
+
+    .turnav{
+        font-size: 1.5em;
+    }
+}
+
+.turnactiontypeslot{
     margin-left: 1em;
 }
 
-.actiontype{
+@media only screen and (max-width: 1200px) {
+    .turnactiontype{
+        margin-left: 0;
+    }
+}
+
+.turnactiontype{
     font-size: 2em;
 }
+
+
+@media only screen and (min-width: 1201px){
+    .turnactivebundle{
+        display: flex;
+        margin-left: auto;
+        flex-flow: row;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .turnactivebundle{
+        display: flex;
+        flex-flow: column;
+        margin-left: auto;
+
+
+    }
+}
+
+.turnactiveslot{
+    display: flex;
+    flex-flow: column;
+    justify-items: center;
+    align-items: center;
+    margin-inline: 0.5em;
+
+    background-color: var(--light-color); 
+    border-radius: 100%;
+    height: 3.2em;
+    width: 3.2em;
+    padding: 0.5em;
+    object-fit: contain;
+
+    text-align: center;
+}
+
+@media only screen and (max-width: 1200px) {
+    .turnactiveslot{
+        height: 1.5em;
+        width: 1.5em;
+        flex-flow: row;
+    }
+}
+
+@media only screen and (min-width: 1201px){
+    .stackable {
+        transform: translate(0%, -30%);
+    }
+}
+
+.turnactiveimg{
+    height: 100%;
+    width: 100%;
+    filter: invert(1);
+}
+
+.turnstackammount{
+    padding: 0.4em;
+    border-radius: 0.3em;
+    color: var(--primary-color);
+    font-weight: bolder;
+    background-color: var(--light-color);
+}
+
+@media only screen and (max-width: 1200px) {
+    .turnstackammount{
+        border-top-left-radius: 0em;
+        border-bottom-left-radius: 0em;
+        padding-left: 10%;
+    }
+}
+
