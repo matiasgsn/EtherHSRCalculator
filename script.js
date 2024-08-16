@@ -30,6 +30,7 @@
 
 // Cycle counter
 let cycle = 0;
+let turn = 0;
 
 // Curent unit
 let currentUnit = 0;
@@ -40,7 +41,6 @@ const C0AV = 150;
 const CAV = 100;
 
 // Each unit
-
 let char = [
     {
         // Char1
@@ -48,7 +48,8 @@ let char = [
         img: "Images/Character_Feixiao_Icon.webp",
         spd : localStorage.getItem("char1SPD"),
         av : 0,
-        slot : 1
+        stackFunction : "feixiao_terrasplitProc()",
+        slot : 0
         
     },{
         // Char2
@@ -56,7 +57,7 @@ let char = [
         img: "Images/Character_Aventurine_Icon.webp",
         spd : localStorage.getItem("char2SPD"),
         av : 0,
-        slot : 2
+        slot : 1
         
     }, {
         // Char3
@@ -64,7 +65,7 @@ let char = [
         img: "Images/Character_Robin_Icon.webp",
         spd : localStorage.getItem("char3SPD"),
         av : 0,
-        slot : 3
+        slot : 2
         
     }, {
         // Char4
@@ -72,10 +73,90 @@ let char = [
         img: "Images/Character_Topaz_and_Numby_Icon.webp",
         spd : localStorage.getItem("char4SPD"),
         av : 0,
-        slot : 4
+        slot : 3
         
     }
 ];
+
+// Action Order Controller
+let actionOrder = [
+    {
+        slot: 0,
+        av: 0
+    },
+    {
+        slot: 1,
+        av: 0
+
+    },
+    {
+        slot: 2,
+        av: 0
+
+    },
+    {
+        slot: 3,
+        av: 0
+
+    }
+];
+
+// Universal stack calling function
+let tempStack = 0
+var proc = {
+    "feixiao": (function feixiao_terrasplitProc() {
+        if (feixiao_terrasplit.currentstack < feixiao_terrasplit.stackcap) {
+            feixiao_terrasplit.halfstack++;
+            if (feixiao_terrasplit.halfstack == 2) {
+                feixiao_terrasplit.currentstack++;
+                feixiao_terrasplit.halfstack = 0;
+            }
+        }
+        tempStack = feixiao_terrasplit;
+        actionStacks(currentUnit);
+    }),
+
+    "robin": (function robin_pinionsAriaProc(action) {
+        if (action == "start") {
+            robin_pinionsAria.currentstack = 3;
+        }
+        if (action != "start") {
+            if (robin_pinionsAria.currentstack == 0) {
+                robin_pinionsAria.currentstack = 3;
+            } else {
+                if (char[currentUnit].name == "Robin"){
+                    robin_pinionsAria.currentstack--;
+                    console.log(robin_pinionsAria.currentstack);
+                }
+            }
+        }
+
+        tempStack = robin_pinionsAria;
+        actionStacks(currentUnit);
+    })
+}
+
+function call(name, arg){
+    proc[name](arg)
+}
+
+// Each Unit's Stacks
+// Feixiao
+let feixiao_terrasplit = {
+    img: "Images/Feixiao/Ability_Terrasplit.webp",
+    stackable: 1,
+    stackcap: 12,
+    currentstack: 0,
+    halfstack: 0
+}
+
+// Robin
+let robin_pinionsAria = {
+    img: "Images/Robin/Ability_Pinions_Aria.webp",
+    stackable: 1,
+    stackcap: 3,
+    currentstack: 0,
+}
 
 
 // Gives each character their previous speed back
@@ -84,6 +165,7 @@ function retrieveData() {
     document.querySelector('#character2speed').value = char[1].spd
     document.querySelector('#character3speed').value = char[2].spd
     document.querySelector('#character4speed').value = char[3].spd
+    console.log("Previous data fetched.");
 }
 
 
@@ -108,7 +190,7 @@ function expand(selection) {
 }
 
 /* Calculates Action Values */
-function fetchAVs() {
+function startAVs() {
     char[0].spd = document.querySelector('#character1speed').value
     char[1].spd = document.querySelector('#character2speed').value
     char[2].spd = document.querySelector('#character3speed').value
@@ -125,52 +207,91 @@ function fetchAVs() {
     char[3].av = 10000 / char[3].spd;
 }
 
-function findDuplicates(array) {
-    return array.filter((currentValue, currentIndex) =>
-    array.indexOf(currentValue) !== currentIndex);
-}
-
-let aValues = [];
 function startOrder() {
-    aValues = [char[0].av, char[1].av, char[2].av, char[3].av];
-
-    if (findDuplicates(aValues).lenght != 0) {
-        currentUnit = 1;
-        nextUnit = currentUnit + 1;
-    } else {
-        aValues.sort(function(a, b) {
-            return a - b;
-          });
-        
-        currentUnit = char.map(e => e.av).indexOf(aValues[0]);
-        if (currentUnit + 1 == 5) {
-            nextUnit = 1;
-        } else {
-            nextUnit = currentUnit + 1;
-        }
-
-    }
+    actionOrder = [
+        {
+            slot: 0,
+            av: char[0].av
+        },
+        {
+            slot: 1,
+            av: char[1].av
     
+        },
+        {
+            slot: 2,
+            av: char[2].av
+    
+        },
+        {
+            slot: 3,
+            av: char[3].av
+    
+        }
+    ];
+
+    actionOrder.sort((x, y) => x.av - y.av || x.slot - y.slot);
+    currentUnit = actionOrder[0].slot;
 }
+    
 
 /*Adds action to the Action Order*/
-function action(currentUnit){
+let turnstacks = 0;
+function actionStacks(currentUnit){
+    turnstacks++;
+
+    document.querySelector(`#turnactivebundle${turn}`).innerHTML += `
+                    <div class="turnactiveslot stackable" id="turnactiveslot${turn}_${turnstacks}">
+                        <img src="" class="turnactiveimg" id="turnactiveimg${turn}_${turnstacks}">
+                    </div>
+    `
+
+    document.getElementById(`turnactiveimg${turn}_${turnstacks}`).setAttribute("src", tempStack.img);
+    console.log("set");
+
+    if (tempStack.stackable == 1) {
+        document.querySelector(`#turnactiveslot${turn}_${turnstacks}`).innerHTML += `
+            <p class="turnstackammount">${tempStack.currentstack}</p>
+        `
+    }
+}
+
+let currentUnitName = (char[currentUnit].name).toLowerCase()
+function action(currentUnit, type){
+    turn++;
     document.querySelector('.actionorder').innerHTML += `
-        <div class="turn">
-                <img src="${char[currentUnit].img}" class="characterimgsm unselectable">
+        <div class="turn unselectable" id="turn${turn}">
+                <img src="${char[currentUnit].img}" class="characterimgsm">
                 <div class="turntitle">
                     <p class="turncharactername">${char[currentUnit].name}</p>     
                 </div>
 
                 <div class="turnavslot">
-                    <p class="turnav">${char[currentUnit].av.toFixed(0)}</p>
+                    <p class="turnav">${Math.floor(char[currentUnit].av)}</p>
                 </div>
+
+                <div class="turnactiontypeslot">
+                    <p class="turnactiontype">${type}</p>
+                </div>
+
+                <div class="turnactivebundle" id="turnactivebundle${turn}"></div>
         </div>
     `
+
+    call(currentUnitName);
+    call("robin");
 }
+
+
+/* Does Current Action */ 
+function currentAction (currentUnit, nextUnit) {
+    let remainingAction = char[currentUnit].av 
+}
+
 
 /* Whole Calculation Process*/
 function calculate() {
-    fetchAVs();
+    startAVs();
     startOrder();
+    action(currentUnit, "Skill")
 }
