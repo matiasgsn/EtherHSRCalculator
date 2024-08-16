@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ether: HSR Calculator</title>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onLoad="retrieveData()">
+    <!-- Selected Characters -->
+    <div class="characterdisplay unselectable">
+        <div class="character growhover" id="character1">
+            <div class="characterportrait" onclick="expand('character1')">
+                <img src="Images/Character_Feixiao_Icon.webp" class="characterimg" id="characterimg1">
+                <p class="charactername">Feixiao</p>
+            </div>
+
+            <div class="characterdropdown" id="character1dropdown">
+                <p>Speed: </p>
+                <input type="number" inputmode="numeric" value="0" name="character1speed" class="characterspeed" id="character1speed">
+            </div>
+        </div>
+
+        <div class="character growhover" id="character2">
+            <div class="characterportrait" onclick="expand('character2')">
+                <img src="Images/Character_Aventurine_Icon.webp" class="characterimg" id="characterimg2">
+                <p class="charactername">Aventurine</p>
+            </div>
+
+            <div class="characterdropdown" id="character2dropdown">
+                <p>Speed: </p>
+                <input type="number" inputmode="numeric" value="0" name="character2speed" class="characterspeed" id="character2speed">
+            </div>
+        </div>
+
+        <div class="character growhover" id="character3">
+            <div class="characterportrait" onclick="expand('character3')">
+                <img src="Images/Character_Robin_Icon.webp" class="characterimg" id="characterimg3">
+                <p class="charactername">Robin</p>
+            </div>
+
+            <div class="characterdropdown" id="character3dropdown">
+                <p>Speed: </p>
+                <input type="number" inputmode="numeric" value="0" name="character3speed" class="characterspeed" id="character3speed">
+            </div>
+        </div>
+
+        <div class="character growhover" id="character4">
+            <div class="characterportrait" onclick="expand('character4')">
+                <img src="Images/Character_Topaz_and_Numby_Icon.webp" class="characterimg" id="characterimg4">
+                <p class="charactername">Topaz</p>
+            </div>
+
+            <div class="characterdropdown" id="character4dropdown">
+                <p>Speed: </p>
+                <input type="number" inputmode="numeric" value=0 name="character4speed" class="characterspeed" id="character4speed">
+            </div>
+        </div>
+    </div>
+
+    <!-- Calculate Button -->
+    <input type="button" value="Calculate" id="calculatebutton" class="growhover" onclick="calculate()">
+
+    <!-- Action Order -->
+    <div class="actionorder">
+        <div class="turn">
+                <img src="Images/Character_Caelus_29_Icon.webp" class="characterimgsm unselectable">
+                <div class="turntitle">
+                    <p class="turncharactername">Caelus</p>     
+                </div>
+
+                <div class="turnavslot">
+                    <p class="turnav">149</p>
+                </div>
+
+                <div class="actiontypeslot">
+                    <p class="actiontype">SKILL</p>
+                </div>
+        </div>
+    </div>
+</body>
+</html>
