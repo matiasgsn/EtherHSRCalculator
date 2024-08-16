@@ -103,6 +103,8 @@ function expand(selection) {
     let selectedCharacterDropdown = selectedCharacter.querySelector('.characterdropdown');
     console.log(selectedCharacterDropdown);
     swapDisplay(selectedCharacterDropdown)
+
+    selectedCharacter.scrollIntoView({ behavior: "smooth", block: "center" }); 
 }
 
 /* Calculates Action Values */

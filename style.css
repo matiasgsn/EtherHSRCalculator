@@ -29,6 +29,8 @@
     --accent-color: #76ABAE;
     --light-color: #EEEEEE;
 
+    -webkit-tap-highlight-color: transparent;
+
     font-family: Din;
 }
 
@@ -41,6 +43,13 @@ body{
 
 
 /* Utility */
+/* Small devices (portrait tablets and large phones, 600px and up) 
+@media only screen and (min-width: 600px) {...}
+/* Medium devices (landscape tablets, 768px and up) 
+@media only screen and (min-width: 768px) {...}
+/* Extra large devices (large laptops and desktops, 1200px and up) 
+@media only screen and (min-width: 1200px) {...}*/
+
 .unselectable {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -58,6 +67,17 @@ body{
 .growhover:hover{
     transform: scale(1.1); 
 }
+
+@media only screen and (max-width: 1200px) {
+    .growhover:hover{
+        transform: none;
+    }
+
+    .growhover:active{
+        transform: scale(1.05);
+    }
+}
+
 
 /* Character Displays*/
 .characterdisplay{
@@ -80,11 +100,13 @@ body{
 .character{
     display: flex;
     flex-direction: column;
+    flex-basis: 100%s;
     justify-content: center;
     align-items: center;
 
-    flex-grow: 0;
-    flex-shrink: 1;
+    max-width: 15em;
+    flex-grow: 1;
+    flex-shrink: 11;
 }
 
 .characterportrait{
@@ -149,10 +171,25 @@ body{
     font-size: 1.5em;
 }
 
-#calculatebutton:hover{
-    background-color: var(--accent-color);
-    border-style: solid;
-    border-color: var(--primary-color); 
+@media only screen and (min-width: 1201px){
+    #calculatebutton:hover{
+        background-color: var(--accent-color);
+        border-style: solid;
+        border-color: var(--primary-color); 
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    #calculatebutton{
+        margin-top: 2.5em;
+        margin-bottom: 5em;
+    }
+
+    #calculatebutton:active{
+        background-color: var(--accent-color);
+        border-style: solid;
+        border-color: var(--primary-color); 
+    }
 }
 
 
