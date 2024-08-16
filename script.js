@@ -117,7 +117,7 @@ var proc = {
     }),
 
     "robin": (function robin_pinionsAriaProc(action) {
-        if (action == "start") {
+        if (action == "start" && char[currentUnit].name == "Robin") {
             robin_pinionsAria.currentstack = 3;
         }
         if (action != "start") {

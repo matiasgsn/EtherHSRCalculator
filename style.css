@@ -256,6 +256,12 @@ body{
     align-items: center;
 }
 
+@media only screen and (max-width: 1200px) {
+    .turn{
+        margin-bottom: 20%;
+    }
+}
+
 
 .characterimgsm{
     position: absolute;
@@ -283,6 +289,11 @@ body{
     flex-direction: column;
 }
 
+.turncharactername{
+    font-size: 2em;
+    margin: 0;
+}
+
 @media only screen and (max-width: 1200px){
     .turntitle{
         left: 50%;
@@ -290,10 +301,7 @@ body{
     }
 }
 
-.turncharactername{
-    font-size: 2em;
-    margin: 0;
-}
+
 
 .turnavslot{
     display: flex;
@@ -339,8 +347,25 @@ body{
     }
 
     .turnactiontype{
-        margin-left: 50%;
+        margin-left: 40%;
         transform: translate(-50%, 0%)
+        
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .turnactiontype{
+        margin-left: 30%;
+        transform: translate(-50%, 0%)
+        
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .turnactiontype{
+        margin-left: 20%;
+        transform: translate(-50%, 0%)
+        
     }
 }
 
