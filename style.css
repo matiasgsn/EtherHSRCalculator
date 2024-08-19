@@ -258,6 +258,12 @@ body{
 
 @media only screen and (max-width: 1200px) {
     .turn{
+        margin-bottom: 10%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .turn{
         margin-bottom: 20%;
     }
 }
@@ -283,9 +289,10 @@ body{
 }
 
 .turntitle{
+    text-align: start;
     display: flex;
     position: absolute;
-    transform: translate(50%, -175%);
+    transform: translate(3.5em, -175%);
     flex-direction: column;
 }
 
@@ -297,7 +304,14 @@ body{
 @media only screen and (max-width: 1200px){
     .turntitle{
         left: 50%;
-        transform: translate(-50%, -175%);
+        transform: translate(-50%, -220%);
+    }
+}
+
+@media only screen and (max-width: 600px){
+    .turncharactername{
+        font-size: 1.5em;
+        
     }
 }
 
@@ -340,6 +354,10 @@ body{
     margin-left: 1em;
 }
 
+.turnactiontype{
+    font-size: 2em;
+}
+
 @media only screen and (max-width: 1200px) {
 
     .turnactiontypeslot{
@@ -364,14 +382,12 @@ body{
 @media only screen and (max-width: 600px) {
     .turnactiontype{
         margin-left: 20%;
-        transform: translate(-50%, 0%)
-        
+        transform: translate(-50%, 0%);
+        font-size: 1.5em;
     }
 }
 
-.turnactiontype{
-    font-size: 2em;
-}
+
 
 
 @media only screen and (min-width: 1201px){
